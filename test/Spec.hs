@@ -3,6 +3,7 @@ import Data.Vector.Generic.Extra
 import qualified Data.Vector as V
 import qualified Data.Vector.Unboxed as U
 import Test.Hspec
+import Test.QuickCheck
 
 main :: IO ()
 main = hspec $ do
@@ -20,3 +21,15 @@ main = hspec $ do
       it "returns only the even elements" $
         mapMaybe (\x -> if odd x then Nothing else Just x) (U.fromList [1..10])
           `shouldBe` (U.fromList ([2,4..10] :: [Word]))
+
+  describe "lefts" $ do
+    it "is inverse to \"map Left\"" $ property $
+        \x -> (lefts . V.map Left) x == (x :: V.Vector Word)
+
+  describe "rights" $ do
+    it "is inverse to \"map Right\"" $ property $
+      \x -> (rights . V.map Right) x == (x :: V.Vector String)
+
+instance Arbitrary a => Arbitrary (V.Vector a) where
+  arbitrary = V.fromList <$> arbitrary
+  shrink = fmap V.fromList . shrink . V.toList
