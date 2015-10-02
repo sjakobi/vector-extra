@@ -1,0 +1,13 @@
+lefts
+rights
+partitionEithers
+
+sort?,  nub, intersect, der ganze Data.List-Kram?
+
+listToMaybe
+maybeToList
+catMaybes
+
+# benchmarken, optimieren und so
+
+zum paket extra?
