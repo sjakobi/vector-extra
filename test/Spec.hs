@@ -30,6 +30,16 @@ main = hspec $ do
     it "is inverse to \"map Right\"" $ property $
       \x -> (rights . V.map Right) x == (x :: V.Vector String)
 
+  describe "partitionEithers" $ do
+    it "plays nice" $ property $
+      \(xs, ys) -> let ls = V.map Left xs
+                       rs = V.map Right ys
+                   in partitionEithers (rs V.++ ls) ==
+                        (xs :: V.Vector Bool, ys :: V.Vector Integer)
+    it "real nice" $ property $
+      \xs -> let (ls, rs) = partitionEithers xs
+             in V.length ls + V.length rs == V.length (xs :: V.Vector (Either Float Double))
+
 instance Arbitrary a => Arbitrary (V.Vector a) where
   arbitrary = V.fromList <$> arbitrary
   shrink = fmap V.fromList . shrink . V.toList
