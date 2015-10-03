@@ -4,8 +4,7 @@ module Data.Vector.Generic.Extra where
 
 import qualified Data.Vector.Fusion.Stream.Monadic.Extra as MStream
 
-import Data.Either (isLeft,isRight)
-import Data.Either.Extra (fromLeft,fromRight)
+import Data.Either.Extra (fromLeft,fromRight,isLeft,isRight)
 import qualified Data.Vector.Fusion.Stream as Stream
 import Data.Vector.Generic (Vector)
 import qualified Data.Vector.Generic as G
