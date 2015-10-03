@@ -21,7 +21,7 @@ main = hspec $ do
                  in mapMaybe f xs == U.empty
     context "when provided with \"\\x -> if odd x then Nothing else Just x\"" $
       it "returns only the even elements" $ property $
-        \xs -> let f :: Word -> Maybe Word
+        \xs -> let f :: Int -> Maybe Int
                    f x =
                      if odd x
                        then Nothing
@@ -51,7 +51,7 @@ main = hspec $ do
 
   describe "lefts" $ do
     it "is inverse to \"map Left\"" $ property $
-        \x -> (lefts . V.map Left) x == (x :: V.Vector Word)
+        \x -> (lefts . V.map Left) x == (x :: V.Vector Int)
 
   describe "rights" $ do
     it "is inverse to \"map Right\"" $ property $
@@ -68,9 +68,9 @@ main = hspec $ do
              in V.length ls + V.length rs == V.length (xs :: V.Vector (Either Float Double))
 
 instance Arbitrary a => Arbitrary (V.Vector a) where
-  arbitrary = V.fromList <$> arbitrary
+  arbitrary = fmap V.fromList arbitrary
   shrink = fmap V.fromList . shrink . V.toList
 
 instance (U.Unbox a, Arbitrary a) => Arbitrary (U.Vector a) where
-  arbitrary = U.fromList <$> arbitrary
+  arbitrary = fmap U.fromList arbitrary
   shrink = fmap U.fromList . shrink . U.toList
