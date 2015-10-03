@@ -35,6 +35,19 @@ test-suite vector-extra-test
   ghc-options:         -Wall -threaded -rtsopts -with-rtsopts=-N
   default-language:    Haskell2010
 
+
+test-suite list-analogies
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             ListAnalogies.hs
+  build-depends:       base
+                     , tasty
+                     , tasty-smallcheck
+                     , vector
+                     , vector-extra
+  ghc-options:         -Wall -Werror -threaded -rtsopts -with-rtsopts=-N
+  default-language:    Haskell2010
+
 source-repository head
   type:     git
   location: https://github.com/sjakobi/vector-extra
