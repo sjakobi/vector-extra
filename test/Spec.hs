@@ -2,8 +2,8 @@ import Data.Vector.Generic.Extra
 
 import qualified Data.Vector as V
 import qualified Data.Vector.Unboxed as U
-import Test.Hspec
-import Test.QuickCheck
+import Test.Hspec (context,describe,hspec,it)
+import Test.QuickCheck (Arbitrary(..),property)
 
 main :: IO ()
 main = hspec $ do

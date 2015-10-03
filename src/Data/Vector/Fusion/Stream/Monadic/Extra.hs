@@ -1,7 +1,7 @@
 module Data.Vector.Fusion.Stream.Monadic.Extra where
 
-import Data.Vector.Fusion.Stream.Size
-import Data.Vector.Fusion.Stream.Monadic
+import Data.Vector.Fusion.Stream.Size (toMax)
+import Data.Vector.Fusion.Stream.Monadic (Stream(..),Step(..))
 
 mapMaybe :: Monad m => (a -> Maybe b) -> Stream m a -> Stream m b
 mapMaybe f = mapMaybeM (return . f)
